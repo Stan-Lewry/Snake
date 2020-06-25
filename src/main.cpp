@@ -1,6 +1,8 @@
 #include "Utils/SDLUtils.h"
 #include "Utils/Debug.h"
 #include "GameEngine.h"
+#include "Entity/SnakeLevel.h"
+#include "Entity/Snake.h"
 
 int main (int argv, char* argc[])
 {
@@ -14,6 +16,9 @@ int main (int argv, char* argc[])
     if (initSDL())
     {
         GameEngine* ge = GameEngine::getInstance();
+
+        //Wall* w = new Wall();
+        SnakeLevel* sl = new SnakeLevel();
 
         ge->run();
     }

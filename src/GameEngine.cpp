@@ -46,17 +46,17 @@ GameEngine::GameEngine() {
     SDL_DisplayMode dm;
     SDL_GetDisplayMode(0, 0, &dm);
 
-    cam = new Camera({4.0f, 4.0f}, 50.0f);
+    cam = new Camera({20.0f, 20.0f}, 10.0f);
 
     input = new InputSubSystem();
     phys = new PhysicsSubSystem();
     TextureManager* tm  = new TextureManager();
     tm->initializeResource("assets/sheet.st");
-    renderer = new Renderer2D(tm, 0, 0, 640, 480, cam);
+    renderer = new Renderer2D(tm, 0, 0, 640, 640, cam);
 
     debugInfo = new DebugInfo();
-    debugRenderer = new DebugRenderer(0, 0, 640, 480, cam, debugInfo);
-    debugConsoleRenderer = new DebugConsoleRenderer(0, 0, 640, 480);
+    debugRenderer = new DebugRenderer(0, 0, 640, 640, cam, debugInfo);
+    debugConsoleRenderer = new DebugConsoleRenderer(0, 0, 640, 640);
 
     anim = new AnimationSubSystem();
 }

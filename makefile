@@ -45,6 +45,10 @@ OBJS = \
 	src/Entity/SimpleWorldEntity.cpp \
 	src/Entity/Camera.h \
 	src/Entity/Camera.cpp \
+	src/Entity/SnakeLevel.h \
+	src/Entity/SnakeLevel.cpp \
+	src/Entity/Snake.h \
+	src/Entity/Snake.cpp
 	
 CC = g++
 
