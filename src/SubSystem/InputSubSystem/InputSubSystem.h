@@ -36,5 +36,9 @@ private:
         {SDLK_F12, {f12, false}},
         {SDLK_RIGHTBRACKET, {rightSquareBracket, false}},
         {SDLK_LEFTBRACKET, {leftSquareBracket, false}},
+        {SDLK_w, {w, false}},
+        {SDLK_a, {a, false}},
+        {SDLK_s, {s, false}},
+        {SDLK_d, {d, false}},
         };
 };

@@ -16,4 +16,6 @@ private:
     WorldComponent* world;
     RenderableComponent* rend;
     PhysicsComponent* phys;
+
+    bool alive;
 };

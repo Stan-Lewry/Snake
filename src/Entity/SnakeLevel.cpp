@@ -18,7 +18,11 @@ SnakeLevel::SnakeLevel() {
 void SnakeLevel::createLevel(int w, int h) {
     for (int i = 0; i < w; ++i) {
         for (int j = 0; j < h; ++j) {
-            groundObjects.push_back(new Ground(j, i));
+            if (i == 0 || i == w - 1 || j == 0 || j == h - 1) {
+                groundObjects.push_back(new Wall(j, i));
+            } else {
+                groundObjects.push_back(new Ground(j, i));
+            }
         }
     }
 }

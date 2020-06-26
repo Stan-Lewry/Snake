@@ -21,7 +21,7 @@ bool initSDL()
     //                            dm.w, dm.h, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-                                640, 640, 0);
+                                400, 400, 0);
 
 	if (window)
     {

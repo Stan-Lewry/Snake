@@ -31,7 +31,7 @@ public:
     static InputComponent* createInputComponent(std::list<Button> buttons);
     static PhysicsComponent* createPhysicsComponent(vect<vect<float>> boundingBox, std::string name, WorldComponent* world);
     static AnimationComponent* createAnimationComponent(std::vector<std::string> frames, double interval, bool loop, bool play, RenderableComponent* renderable);
-    
+    static void registerEntity(Entity* entity);
 private:
     GameEngine();
     virtual ~GameEngine();
@@ -49,5 +49,7 @@ private:
     DebugConsoleRenderer* debugConsoleRenderer;
 
     AnimationSubSystem* anim;
+
+    std::vector<Entity*> entityList;
 };
 

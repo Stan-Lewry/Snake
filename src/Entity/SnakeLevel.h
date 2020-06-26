@@ -34,5 +34,5 @@ public:
 private:
     void createLevel(int w, int h);
 
-    std::vector<Ground*> groundObjects;
+    std::vector<Entity*> groundObjects;
 };

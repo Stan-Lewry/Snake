@@ -29,6 +29,7 @@ InputComponent* GameEngine::createInputComponent(std::list<Button> buttons) {
 PhysicsComponent* GameEngine::createPhysicsComponent(vect<vect<float>> boundingBox, std::string name, WorldComponent* world) {
     PhysicsComponent* pc = new PhysicsComponent(boundingBox, name);
     instance->phys->registerPhysics(world, pc);
+    instance->debugRenderer->registerDebugEntity(world, pc, red);
     return pc;
 }
 
@@ -37,7 +38,10 @@ AnimationComponent* GameEngine::createAnimationComponent(std::vector<std::string
     instance->anim->registerAnimationEntity(ac, renderable);
     return ac;
 }
-    
+
+void GameEngine::registerEntity(Entity* entity) {
+    instance->entityList.push_back(entity);
+}
 
 
 GameEngine::GameEngine() {
@@ -52,11 +56,11 @@ GameEngine::GameEngine() {
     phys = new PhysicsSubSystem();
     TextureManager* tm  = new TextureManager();
     tm->initializeResource("assets/sheet.st");
-    renderer = new Renderer2D(tm, 0, 0, 640, 640, cam);
+    renderer = new Renderer2D(tm, 0, 0, 400, 400, cam);
 
     debugInfo = new DebugInfo();
-    debugRenderer = new DebugRenderer(0, 0, 640, 640, cam, debugInfo);
-    debugConsoleRenderer = new DebugConsoleRenderer(0, 0, 640, 640);
+    debugRenderer = new DebugRenderer(0, 0, 400, 400, cam, debugInfo);
+    debugConsoleRenderer = new DebugConsoleRenderer(0, 0, 400, 400);
 
     anim = new AnimationSubSystem();
 }
@@ -89,7 +93,6 @@ void GameEngine::run() {
         now = SDL_GetPerformanceCounter();
         delta = (double)((now - last) * 1000 / (double)SDL_GetPerformanceFrequency());
 
-
         timer += delta;
         ++fCounter;
         if (timer >= 1000) {
@@ -97,6 +100,8 @@ void GameEngine::run() {
             debugInfo->frameCount = fCounter;
             fCounter = 0;
         }
+
+        for (auto e : entityList) e->update(delta);
 
         cam->update(delta);
         phys->update(delta);      
@@ -107,7 +112,6 @@ void GameEngine::run() {
         if (quitButton->getButtonState(f2) && quitButton->getButtonState(f2) != lastF2) showConsole = !showConsole;
         if (quitButton->getButtonState(rightSquareBracket) && cam->getZoom() > 20.0f) cam->setZoom(cam->getZoom() - 1.0f);
         if (quitButton->getButtonState(leftSquareBracket) && cam->getZoom() < 600.0f) cam->setZoom(cam->getZoom() + 1.0f);
-
 
         SDL_RenderClear(rend);
         renderer->update(delta);
