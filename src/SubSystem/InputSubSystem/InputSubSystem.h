@@ -40,5 +40,6 @@ private:
         {SDLK_a, {a, false}},
         {SDLK_s, {s, false}},
         {SDLK_d, {d, false}},
+        {SDLK_SPACE, {space, false}},
         };
 };

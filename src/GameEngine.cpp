@@ -26,8 +26,8 @@ InputComponent* GameEngine::createInputComponent(std::list<Button> buttons) {
     return ic;
 }
 
-PhysicsComponent* GameEngine::createPhysicsComponent(vect<vect<float>> boundingBox, std::string name, WorldComponent* world) {
-    PhysicsComponent* pc = new PhysicsComponent(boundingBox, name);
+PhysicsComponent* GameEngine::createPhysicsComponent(vect<vect<float>> boundingBox, std::string name, bool solid, WorldComponent* world) {
+    PhysicsComponent* pc = new PhysicsComponent(boundingBox, name, solid);
     instance->phys->registerPhysics(world, pc);
     instance->debugRenderer->registerDebugEntity(world, pc, red);
     return pc;
@@ -50,7 +50,7 @@ GameEngine::GameEngine() {
     SDL_DisplayMode dm;
     SDL_GetDisplayMode(0, 0, &dm);
 
-    cam = new Camera({20.0f, 20.0f}, 10.0f);
+    cam = new Camera({10.0f, 10.0f}, 20.0f);
 
     input = new InputSubSystem();
     phys = new PhysicsSubSystem();

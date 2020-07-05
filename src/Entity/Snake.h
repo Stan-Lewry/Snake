@@ -4,6 +4,12 @@
 
 #include "../GameEngine.h"
 
+struct Segment {
+    WorldComponent* world;
+    RenderableComponent* rend;
+    PhysicsComponent* phys;
+};
+
 class Snake : public Entity {
 public:
     Snake(int spawnX, int spawnY);
@@ -12,10 +18,13 @@ protected:
     void doUpdate() override;
 
 private:
+    void addSegment();
+
+    std::vector<Segment> body;
+
     InputComponent* inputs;
-    WorldComponent* world;
-    RenderableComponent* rend;
-    PhysicsComponent* phys;
+
+    int lastX, lastY;
 
     bool alive;
 };

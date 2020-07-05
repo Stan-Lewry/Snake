@@ -1,14 +1,11 @@
 #include "PhysicsComponent.h"
 
-/*
-Physics component needs an ID and a way to store collisions
-*/
-
-PhysicsComponent::PhysicsComponent(vect<vect<float>> _boundingBox, std::string _name)
+PhysicsComponent::PhysicsComponent(vect<vect<float>> _boundingBox, std::string _name, bool _solid)
     : boundingBox(_boundingBox)
     , velocity({0, 0})
     , name(_name)
     , currentCollisionList()
+    , solid(_solid)
 {}
 
 PhysicsComponent::~PhysicsComponent() {
@@ -41,4 +38,8 @@ void PhysicsComponent::clearCollisions() {
 
 std::vector<PhysicsComponent*> PhysicsComponent::getCurrnentCollisionList() {
     return currentCollisionList;
+}
+
+bool PhysicsComponent::isSolid() {
+    return solid;
 }

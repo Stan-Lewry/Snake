@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+#include "Snake.h"
 
 #include "../GameEngine.h"
 
@@ -27,6 +28,18 @@ private:
     RenderableComponent* rend;
 };
 
+class Coin : public Entity {
+public:
+    Coin(int x, int y);
+    virtual ~Coin(){}
+protected:
+    void doUpdate() override;
+private:
+    WorldComponent* world;
+    RenderableComponent* rend;
+    PhysicsComponent* phys;
+};
+
 class SnakeLevel {
 public:
     SnakeLevel();
@@ -34,5 +47,10 @@ public:
 private:
     void createLevel(int w, int h);
 
-    std::vector<Entity*> groundObjects;
+    std::vector<Entity*> level;
+
+    Snake* snake;
+    Coin* coin;
+
+
 };

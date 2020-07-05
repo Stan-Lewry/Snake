@@ -5,7 +5,7 @@
 
 class PhysicsComponent : public Component {
 public:
-    PhysicsComponent(vect<vect<float>> boundingBox, std::string name);
+    PhysicsComponent(vect<vect<float>> boundingBox, std::string name, bool solid);
     virtual ~PhysicsComponent();
     rect<float> getBoundingBox();
     
@@ -15,6 +15,7 @@ public:
     void addCollision(PhysicsComponent* pc);
     void clearCollisions();
     std::vector<PhysicsComponent*> getCurrnentCollisionList();
+    bool isSolid();
 
 private:
 
@@ -22,4 +23,5 @@ private:
     vect<vect<float>> boundingBox;
     std::string name;
     std::vector<PhysicsComponent*> currentCollisionList;
+    bool solid;
 };

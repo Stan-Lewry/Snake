@@ -1,6 +1,6 @@
 #include "PhysicsSubSystem.h"
 
-static const double tickSpeed = 1000 / 2;
+static const double tickSpeed = 1000 / 8;
 static const float frictionConstant = 0.85f;
 static const float frictionThreshold = 0.005f;
 
@@ -20,7 +20,6 @@ void PhysicsSubSystem::doUpdate(double dTime) {
         pair.second->clearCollisions();
 
         resolveCollisionsAABB(pair);
-        //resolveFriction(pair);
 
         pair.first->setWorldX(pair.first->getWorldX() + pair.second->getVelocity().x);
         pair.first->setWorldY(pair.first->getWorldY() + pair.second->getVelocity().y);
@@ -46,14 +45,17 @@ void PhysicsSubSystem::resolveCollisionsAABB(std::pair<WorldComponent*, PhysicsC
             if (SDL_IntersectRect(&rb, &ra, &i)) {
                 bool collide = false;
                 if (i.w <= i.h) {
-                    vel.x = 0;
+                    if (entity2.second->isSolid()) vel.x = 0;
                     collide = true;
                 }
                 if (i.h <= i.w){
-                     vel.y = 0;
+                     if (entity2.second->isSolid()) vel.y = 0;
                      collide = true;
                 }
-                if (collide) entity.second->addCollision(entity2.second);
+                if (collide){
+                    entity.second->addCollision(entity2.second);
+                    entity2.second->addCollision(entity.second);
+                }
                 entity.second->setVelocity(vel);
             }
         }

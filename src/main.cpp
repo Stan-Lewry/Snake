@@ -18,7 +18,6 @@ int main (int argv, char* argc[])
         GameEngine* ge = GameEngine::getInstance();
 
         SnakeLevel* sl = new SnakeLevel();
-        Snake* sn = new Snake(10, 10);
         ge->run();
     }
     else
